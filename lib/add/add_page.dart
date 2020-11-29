@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/main-model.dart';
 
@@ -27,6 +26,15 @@ class AddPage extends StatelessWidget {
                   ),
                   onChanged: (text) {
                     model.newTodoText = text;
+                  },
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Taskの予定日時',
+                    hintText: '2020年12月1日',
+                  ),
+                  onChanged: (text) {
+                    model.newTodoTime = text;
                   },
                 ),
                 SizedBox(

@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/add/add_page.dart';
 import 'package:todo_app/main-model.dart';
@@ -50,11 +52,17 @@ class MainPage extends StatelessWidget {
         ),
         body: Consumer<MainModel>(builder: (context, model, child) {
           final todoList = model.todoList;
+
+          initializeDateFormatting("ja_JP");
+          final schedule = DateTime.now();
+          var formatter = new DateFormat('yyyy/MM/dd(E) HH:mm', "ja_JP");
+          var formatted = formatter.format(schedule);
           return ListView(
             children: todoList
                 .map(
                   (todo) => CheckboxListTile(
                     title: Text(todo.title),
+                    subtitle: Text(todo.schedule),
                     value: todo.isDone,
                     onChanged: (bool value) {
                       todo.isDone = !todo.isDone;

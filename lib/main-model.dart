@@ -5,6 +5,7 @@ import 'package:todo_app/todo.dart';
 class MainModel extends ChangeNotifier {
   List<Todo> todoList = [];
   String newTodoText = '';
+  String newTodoTime = '';
 
   Future getTodoList() async {
     final snapshot =
@@ -31,6 +32,7 @@ class MainModel extends ChangeNotifier {
     final collection = FirebaseFirestore.instance.collection('todoList');
     await collection.add({
       'title': newTodoText,
+      'schedule': newTodoTime,
       'createdAt': Timestamp.now(),
     });
   }
