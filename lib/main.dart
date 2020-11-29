@@ -54,13 +54,14 @@ class MainPage extends StatelessWidget {
           final todoList = model.todoList;
 
           initializeDateFormatting("ja_JP");
-          final schedule = DateTime.now();
+          // var schedule = DateTime.now();
           var formatter = new DateFormat('yyyy/MM/dd(E) HH:mm', "ja_JP");
-          var formatted = formatter.format(schedule);
+          // var formatted = formatter.format(schedule);
           return ListView(
             children: todoList
                 .map(
                   (todo) => CheckboxListTile(
+                    // title: Text(formatter.format(todo.createdAt)),
                     title: Text(todo.title),
                     subtitle: Text(todo.schedule),
                     value: todo.isDone,

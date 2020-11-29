@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/main-model.dart';
 
 class AddPage extends StatelessWidget {
   final MainModel model;
   AddPage(this.model);
+
+  var formatter = new DateFormat('yyyy/MM/dd(E) HH:mm');
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +30,19 @@ class AddPage extends StatelessWidget {
                   ),
                   onChanged: (text) {
                     model.newTodoText = text;
+                    print('変数textの値：' + text);
                   },
                 ),
+                // Text(data)
                 TextField(
                   decoration: InputDecoration(
                     labelText: 'Taskの予定日時',
-                    hintText: '2020年12月1日',
                   ),
-                  onChanged: (text) {
-                    model.newTodoTime = text;
+                  onTap: () {
+                    DatePicker.showDateTimePicker(context,
+                        showTitleActions: true, onConfirm: (date) {
+                      model.newTodoTime = formatter.format(date);
+                    }, currentTime: DateTime.now(), locale: LocaleType.jp);
                   },
                 ),
                 SizedBox(
